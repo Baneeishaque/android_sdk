@@ -18,6 +18,11 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
 # WORKAROUND: for issue https://issuetracker.google.com/issues/37137213
 # ENV LD_LIBRARY_PATH ${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
 
+# Install Android SDK Packages
+# https://developer.android.com/studio/command-line/sdkmanager.html
+RUN mkdir -p ${ANDROID_HOME}/licenses/
+RUN echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > ${ANDROID_HOME}/licenses/android-sdk-license
+RUN echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> ${ANDROID_HOME}/licenses/android-sdk-license
 # RUN chmod +x ${ANDROID_HOME}/tools/bin/sdkmanager
 RUN touch /usr/local/share/android-sdk
 
