@@ -31,7 +31,7 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
 ADD license_accepter.sh /opt/
 RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_HOME
 
-# RUN touch /usr/local/share/android-sdk
+RUN touch /usr/local/share/android-sdk
 ARG ANDROID_SDK_PACKAGES="build-tools;28.0.3 platforms;android-28 platform-tools"
 RUN ${ANDROID_HOME}/tools/bin/sdkmanager ${ANDROID_SDK_PACKAGES}
 
