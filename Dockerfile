@@ -44,12 +44,14 @@ ENV PATH $PATH:$ANDROID_HOME/platform-tools
 
 RUN adb version
 
-RUN apt update
-RUN apt install -y ruby-full
+RUN apt-get update
+# RUN apt-get install -y --no-install-recommends apt-utils
+ENV DEBIAN_FRONTEND=teletype
+RUN apt-get install -y ruby-full
 RUN ruby -v
 RUN gem -v
 
-RUN apt install -y make gcc
+RUN apt-get install -y --no-install-recommends make gcc
 RUN make -v
 RUN gcc -v
 
