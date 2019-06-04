@@ -20,9 +20,13 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
 
 # Install Android SDK Packages
 # https://developer.android.com/studio/command-line/sdkmanager.html
-RUN mkdir -p ${ANDROID_HOME}/licenses/
-RUN echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > ${ANDROID_HOME}/licenses/android-sdk-license
-RUN echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> ${ANDROID_HOME}/licenses/android-sdk-license
+# RUN mkdir -p ${ANDROID_HOME}/licenses/
+# RUN echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > ${ANDROID_HOME}/licenses/android-sdk-license
+# RUN echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> ${ANDROID_HOME}/licenses/android-sdk-license
+
+# accept the license agreements of the SDK components
+ADD license_accepter.sh /opt/
+RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_HOME
 # RUN chmod +x ${ANDROID_HOME}/tools/bin/sdkmanager
 RUN touch /usr/local/share/android-sdk
 
