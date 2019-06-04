@@ -26,9 +26,15 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
 
 # accept the license agreements of the SDK components
 ADD license_accepter.sh /opt/
+# RUN /opt/license_accepter.sh $ANDROID_HOME
 RUN chmod +x /opt/license_accepter.sh && /opt/license_accepter.sh $ANDROID_HOME
 # RUN chmod +x ${ANDROID_HOME}/tools/bin/sdkmanager
-RUN touch /usr/local/share/android-sdk
+# RUN touch /usr/local/share/android-sdk
 
-ENV ANDROID_SDK_PACKAGES="build-tools;27.0.3 platforms;android-27 platform-tools extras;android;m2repository extras;google;m2repository extras;google;google_play_services"
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager --channel=3 --verbose ${ANDROID_SDK_PACKAGES}
+ENV ANDROID_SDK_PACKAGES="build-tools;28.0.3 platforms;android-28 platform-tools"
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager ${ANDROID_SDK_PACKAGES}
+
+ENV PATH $PATH:$ANDROID_HOME/platform-tools
+
+# setup adb server
+# EXPOSE 5037
