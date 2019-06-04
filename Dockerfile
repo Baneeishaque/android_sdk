@@ -17,3 +17,9 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
 # ENV _JAVA_OPTIONS -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
 # WORKAROUND: for issue https://issuetracker.google.com/issues/37137213
 # ENV LD_LIBRARY_PATH ${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
+
+# RUN chmod +x ${ANDROID_HOME}/tools/bin/sdkmanager
+RUN touch /usr/local/share/android-sdk
+
+ENV ANDROID_SDK_PACKAGES="build-tools;27.0.3 platforms;android-27 platform-tools extras;android;m2repository extras;google;m2repository extras;google;google_play_services"
+RUN ${ANDROID_HOME}/tools/bin/sdkmanager --channel=3 --verbose ${ANDROID_SDK_PACKAGES}
