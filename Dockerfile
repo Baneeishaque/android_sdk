@@ -1,5 +1,8 @@
 FROM gradle:5.4.1-jdk8
 
+RUN gradle -v
+RUN java -version
+
 # download and install Android SDK
 # https://developer.android.com/studio/#downloads
 ARG ANDROID_SDK_VERSION=4333796
@@ -38,3 +41,18 @@ ENV PATH $PATH:$ANDROID_HOME/platform-tools
 
 # setup adb server
 # EXPOSE 5037
+
+RUN adb version
+
+RUN apt update
+RUN apt install -y ruby-full
+RUN ruby -v
+RUN gem -v
+
+RUN apt install -y make gcc
+RUN make -v
+RUN gcc -v
+
+RUN gem install dryrun
+
+CMD ["bash"]
